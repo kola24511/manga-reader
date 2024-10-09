@@ -19,6 +19,7 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+/tmp
 
 /caddy
 frankenphp
