@@ -9,11 +9,6 @@ CONSOLE=${PHP} artisan
 
 in:
 	${DC} exec app sh
-init: 
-    cp .env.example .env
-	composer install
-	npm install
-	php artisan key:generate
 
 ###> DOCKER COMPOSE
 start:
