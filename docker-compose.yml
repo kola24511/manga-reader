@@ -1,9 +1,9 @@
-version: "3.8"
+version: "3.9"
 
 services:
   app:
     container_name: app
-    build: 
+    build:
       context: .
       dockerfile: .docker/app/Dockerfile
     entrypoint: php artisan octane:frankenphp --max-requests=1
@@ -13,10 +13,12 @@ services:
       - .:/app
     depends_on:
       pgsql:
-        condition: service_healthy  
+        condition: service_healthy
+    networks:
+      - readmanga
   queue-runner:
     container_name: queue-runner
-    build: 
+    build:
       context: .
       dockerfile: .docker/app/Dockerfile
     entrypoint: php artisan queue:work --tries=3 --timeout=90 --sleep=3 --daemon
@@ -24,21 +26,28 @@ services:
       - .:/app
     depends_on:
       pgsql:
-        condition: service_healthy   
-  pgsql: 
+        condition: service_healthy
+    networks:
+      - readmanga
+  pgsql:
     container_name: pgsql
-    image: postgres:14    
+    image: postgres:14
     restart: always
     ports:
       - 5432:5432
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: manga-reader
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
       interval: 1s
       timeout: 5s
-      retries: 10  
+      retries: 10
+    networks:
+      - readmanga
+networks:
+    readmanga:
+        driver: bridge

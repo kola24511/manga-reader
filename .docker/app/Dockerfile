@@ -1,6 +1,8 @@
 #FROM --platform=linux/amd64 dunglas/frankenphp
 FROM dunglas/frankenphp
 
+ENV SERVER_NAME="http://"
+
 # add additional extensions here:
 RUN install-php-extensions \
     pgsql \
@@ -31,6 +33,7 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
 
 COPY . /app
 
+COPY ./.docker/php/php.ini /usr/local/etc/php/
 COPY .docker/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 WORKDIR /app
