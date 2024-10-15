@@ -33,7 +33,7 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
 
 COPY . /app
 
-COPY ./.docker/php/php.ini /usr/local/etc/php/
+COPY .docker/app/php.ini /usr/local/etc/php/
 COPY .docker/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 WORKDIR /app
