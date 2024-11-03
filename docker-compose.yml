@@ -29,7 +29,7 @@ services:
       - readmanga
   pgsql:
     container_name: pgsql
-    image: postgres:14
+    image: postgres:17-alpine
     restart: always
     ports:
       - 5432:5432
@@ -47,7 +47,7 @@ services:
     networks:
       - readmanga
 volumes:
-  pgdata:      
+  pgdata:
 networks:
     readmanga:
         driver: bridge
