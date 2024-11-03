@@ -38,7 +38,7 @@ COPY .docker/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.con
 
 WORKDIR /app
 
-RUN composer install --prefer-dist --no-progress --no-interaction --no-dev
+RUN composer install --prefer-dist --no-progress --no-interaction
 
 EXPOSE 80 443
 

@@ -6,8 +6,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
 
@@ -44,4 +46,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //Функция для доступа с определенного почтового домена
+    public function canAccessPanel(Panel $panel): bool
+    {
+    if (app()->environment('local')) {
+        //не требует верификации почты
+        return str_ends_with($this->email, '@gmail.com');
+    } else {
+        // Продакшен или другое окружение
+        return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail(); 
+    }
+}
 }
