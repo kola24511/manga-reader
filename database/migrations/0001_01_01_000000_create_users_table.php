@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('password');
             $table->integer('money')->default(0);
             $table->rememberToken();
+            $table->string('stripe_id')->nullable()->index();
+            $table->string('pm_type')->nullable();
+            $table->string('pm_last_four', 4)->nullable();
+            $table->timestamp('trial_ends_at')->nullable();
             $table->timestamps();
         });
 
@@ -47,5 +51,17 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropIndex([
+                'stripe_id',
+            ]);
+
+            $table->dropColumn([
+                'stripe_id',
+                'pm_type',
+                'pm_last_four',
+                'trial_ends_at',
+            ]);
+        });
     }
 };
