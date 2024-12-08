@@ -14,17 +14,20 @@ return new class extends Migration
             $table->text('description')->comment('Content of the post');
             $table->string('cover_image_url')->nullable();
             $table->string('status')->comment('Состояние перевода');
-            $table->integer('user_id');
             $table->integer('likes')->default(0);
             $table->integer('views')->default(0);
             $table->integer('year_pub')->comment('Год публикации');
-            $table->integer('pg')->comment('Возрастное ограничение');
+            $table->unsignedBigInteger('pg')->nullable();
+            $table->foreign('pg')->references('id')->on('pg_lists')->onDelete('cascade');
             $table->timestamps(); // Создаёт поля created_at и updated_at
         });
     }
 
     public function down()
     {
+        Schema::table('books', function (Blueprint $table) {
+            $table->dropForeign(['pg']); // Удаляем внешний ключ
+        });
         Schema::dropIfExists('books');
     }
 };
