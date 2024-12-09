@@ -19,6 +19,10 @@ class PgListResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Список возрастов';
+
+    protected static ?string $navigationGroup = 'Контент';
+
     public static function form(Form $form): Form
     {
         return $form
