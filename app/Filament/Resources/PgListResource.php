@@ -23,7 +23,9 @@ class PgListResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('pg')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +33,8 @@ class PgListResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('pg')
+                    ->searchable(),
             ])
             ->filters([
                 //
