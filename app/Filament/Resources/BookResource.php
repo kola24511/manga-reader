@@ -40,17 +40,6 @@ class BookResource extends Resource
                 Forms\Components\TextInput::make('status')->label('Статус перевода')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('user_id')->label('Не доделано')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('likes')->label('Лайки')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('views')->label('Просмотры')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
                 Forms\Components\TextInput::make('year_pub')->label('Год публикации')
                     ->required()
                     ->numeric(),
@@ -64,31 +53,28 @@ class BookResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                Tables\Columns\TextColumn::make('title')->label('Название')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('cover_image_url'),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\ImageColumn::make('cover_image_url')->label('Обложка'),
+                Tables\Columns\TextColumn::make('status')->label('Статус')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user_id')
+                Tables\Columns\TextColumn::make('likes')->label('Лайки')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('likes')
+                Tables\Columns\TextColumn::make('views')->label('Просмотры')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('views')
+                Tables\Columns\TextColumn::make('year_pub')->label('Год публикации')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('year_pub')
+                Tables\Columns\TextColumn::make('pg')->label('Возрастное ограничение')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pg')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')->label('Дата создания')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                Tables\Columns\TextColumn::make('updated_at')->label('Дата обновления')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -124,7 +110,7 @@ class BookResource extends Resource
 
     public static function getPgList() 
     {
-        return PgList::pluck('pg');
+        return PgList::pluck('pg', 'id');
     }
 
     /*
