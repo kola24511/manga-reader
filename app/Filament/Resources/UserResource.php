@@ -33,6 +33,12 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
+                Forms\Components\FileUpload::make('avatar_url')->label('Url аватар')
+                    ->image()
+                    ->directory('users'),
+                    Forms\Components\TextInput::make('money')->label('Монеты')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
@@ -51,6 +57,9 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable(),
+                Tables\Columns\ImageColumn::make('avatar_url')->label('Аватар'),
+                Tables\Columns\TextColumn::make('money')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
