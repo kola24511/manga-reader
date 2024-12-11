@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class PgList extends Model
+class StatusBook extends Model
 {
     use HasFactory;
 
-    protected $table = 'pg_lists';
+    protected $table = 'status_books';
 
     protected $fillable = [
-        'pg',
+        'name',
     ];
 
     public function book(): HasOne

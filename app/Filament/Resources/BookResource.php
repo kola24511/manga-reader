@@ -6,6 +6,7 @@ use App\Filament\Resources\BookResource\Pages;
 use App\Filament\Resources\BookResource\RelationManagers;
 use App\Models\Book;
 use App\Models\PgList;
+use App\Models\StatusBook;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -37,9 +38,9 @@ class BookResource extends Resource
                 Forms\Components\FileUpload::make('cover_image_url')->label('Ссылка на обложку')
                     ->image()
                     ->directory('books'),
-                Forms\Components\TextInput::make('status')->label('Статус перевода')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('status')->label('Статус перевода')
+                    ->options(static::getStatusBook())
+                    ->required(),
                 Forms\Components\TextInput::make('year_pub')->label('Год публикации')
                     ->required()
                     ->numeric(),
@@ -56,7 +57,7 @@ class BookResource extends Resource
                 Tables\Columns\TextColumn::make('title')->label('Название')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('cover_image_url')->label('Обложка'),
-                Tables\Columns\TextColumn::make('status')->label('Статус')
+                Tables\Columns\TextColumn::make('statusBook.name')->label('Статус')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('likes')->label('Лайки')
                     ->numeric()
@@ -111,6 +112,11 @@ class BookResource extends Resource
     public static function getPgList() 
     {
         return PgList::pluck('pg', 'id');
+    }
+
+    public static function getStatusBook() 
+    {
+        return StatusBook::pluck('name', 'id');
     }
 
     /*
