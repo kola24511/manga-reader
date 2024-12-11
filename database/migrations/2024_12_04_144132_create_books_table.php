@@ -13,7 +13,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->comment('Content of the post');
             $table->string('cover_image_url')->nullable();
-            $table->string('status')->comment('Состояние перевода');
+            $table->unsignedBigInteger('status')->nullable();
+            $table->foreign('status')->references('id')->on('status_books')->onDelete('cascade');
             $table->integer('likes')->default(0);
             $table->integer('views')->default(0);
             $table->integer('year_pub')->comment('Год публикации');
