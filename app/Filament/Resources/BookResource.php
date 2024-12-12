@@ -12,8 +12,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BookResource extends Resource
 {
@@ -68,8 +66,7 @@ class BookResource extends Resource
                 Tables\Columns\TextColumn::make('year_pub')->label('Год публикации')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pg')->label('Возрастное ограничение')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('pgList.pg')->label('Возрастное ограничение')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label('Дата создания')
                     ->dateTime()
@@ -109,20 +106,20 @@ class BookResource extends Resource
         ];
     }
 
-    public static function getPgList() 
+    public static function getPgList()
     {
         return PgList::pluck('pg', 'id');
     }
 
-    public static function getStatusBook() 
+    public static function getStatusBook()
     {
         return StatusBook::pluck('name', 'id');
     }
 
     /*
-    public static function getStatusBook() 
+    public static function getStatusBook()
     {
-        return 
+        return
     }
      */
 }

@@ -21,7 +21,7 @@ class Book extends Model
 
     public function pgList(): HasOne
     {
-        return $this->hasOne(PgList::class);
+        return $this->hasOne(PgList::class, 'id', 'pg');
     }
 
     public function statusBook(): HasOne
