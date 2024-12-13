@@ -16,7 +16,12 @@ class Book extends Model
         'cover_image_url',
         'status',
         'year_pub',
+        'tags',
         'pg',
+    ];
+
+    protected $casts = [
+        'tags' => 'array',
     ];
 
     public function pgList(): HasOne
@@ -27,5 +32,10 @@ class Book extends Model
     public function statusBook(): HasOne
     {
         return $this->hasOne(StatusBook::class, 'id', 'status');
+    }
+
+    public function bookTag(): HasOne
+    {
+        return $this->hasOne(BookTag::class, 'id', 'name');
     }
 }

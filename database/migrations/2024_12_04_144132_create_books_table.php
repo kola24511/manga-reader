@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->id(); // Создаёт поле id с автоинкрементом
+            $table->id();
             $table->string('title');
             $table->text('description')->comment('Content of the post');
             $table->string('cover_image_url')->nullable();
@@ -18,9 +18,11 @@ return new class extends Migration
             $table->integer('likes')->default(0);
             $table->integer('views')->default(0);
             $table->integer('year_pub')->comment('Год публикации');
+            $table->string('tags');
+            $table->foreign('tags')->references('id')->on('books_tags')->onDelete('cascade');
             $table->unsignedBigInteger('pg')->nullable();
             $table->foreign('pg')->references('id')->on('pg_lists')->onDelete('cascade');
-            $table->timestamps(); // Создаёт поля created_at и updated_at
+            $table->timestamps();
         });
     }
 
