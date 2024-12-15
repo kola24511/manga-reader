@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Book extends Model
 {
     use HasFactory;
@@ -16,12 +16,7 @@ class Book extends Model
         'cover_image_url',
         'status',
         'year_pub',
-        'tags',
         'pg',
-    ];
-
-    protected $casts = [
-        'tags' => 'array',
     ];
 
     public function pgList(): HasOne
@@ -34,8 +29,8 @@ class Book extends Model
         return $this->hasOne(StatusBook::class, 'id', 'status');
     }
 
-    public function bookTag(): HasOne
+    public function tags(): BelongsToMany
     {
-        return $this->hasOne(BookTag::class, 'id', 'name');
+        return $this->belongsToMany(Tag::class, 'books_tags');
     }
 }

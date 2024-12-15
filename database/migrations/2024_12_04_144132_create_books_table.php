@@ -10,16 +10,14 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description')->comment('Content of the post');
-            $table->string('cover_image_url')->nullable();
+            $table->string('title')->comment("Название");
+            $table->text('description')->comment('Описание');
+            $table->string('cover_image_url')->nullable()->comment('Обложка');
             $table->unsignedBigInteger('status')->nullable();
             $table->foreign('status')->references('id')->on('status_books')->onDelete('cascade');
             $table->integer('likes')->default(0);
             $table->integer('views')->default(0);
             $table->integer('year_pub')->comment('Год публикации');
-            $table->string('tags');
-            $table->foreign('tags')->references('id')->on('books_tags')->onDelete('cascade');
             $table->unsignedBigInteger('pg')->nullable();
             $table->foreign('pg')->references('id')->on('pg_lists')->onDelete('cascade');
             $table->timestamps();
