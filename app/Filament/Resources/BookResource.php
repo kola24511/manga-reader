@@ -39,6 +39,11 @@ class BookResource extends Resource
                 Forms\Components\Select::make('status')->label('Статус перевода')
                     ->options(static::getStatusBook())
                     ->required(),
+                Forms\Components\Select::make('tag_id')->label("Тэги")
+                    ->multiple()
+                    ->relationship('tags', 'name')
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('year_pub')->label('Год публикации')
                     ->required()
                     ->numeric(),
