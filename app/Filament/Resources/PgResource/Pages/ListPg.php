@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\PgListResource\Pages;
 
-use App\Filament\Resources\PgListResource;
+use App\Filament\Resources\PgResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListPgLists extends ListRecords
+class ListPg extends ListRecords
 {
-    protected static string $resource = PgListResource::class;
+    protected static string $resource = PgResource::class;
 
     protected function getHeaderActions(): array
     {

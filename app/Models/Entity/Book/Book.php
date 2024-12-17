@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Entity\Book;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 class Book extends Model
 {
     use HasFactory;
@@ -21,12 +22,12 @@ class Book extends Model
 
     public function pgList(): HasOne
     {
-        return $this->hasOne(PgList::class, 'id', 'pg');
+        return $this->hasOne(Pg::class, 'id', 'pg');
     }
 
     public function statusBook(): HasOne
     {
-        return $this->hasOne(StatusBook::class, 'id', 'status');
+        return $this->hasOne(Status::class, 'id', 'status');
     }
 
     public function tags(): BelongsToMany

@@ -4,18 +4,16 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PgListResource\Pages;
 use App\Filament\Resources\PgListResource\RelationManagers;
-use App\Models\PgList;
+use App\Models\Entity\Book\Pg;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PgListResource extends Resource
+class PgResource extends Resource
 {
-    protected static ?string $model = PgList::class;
+    protected static ?string $model = Pg::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -63,9 +61,9 @@ class PgListResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPgLists::route('/'),
-            'create' => Pages\CreatePgList::route('/create'),
-            'edit' => Pages\EditPgList::route('/{record}/edit'),
+            'index' => Pages\ListPg::route('/'),
+            'create' => Pages\CreatePg::route('/create'),
+            'edit' => Pages\EditPg::route('/{record}/edit'),
         ];
     }
 }

@@ -3,10 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookResource\Pages;
-use App\Filament\Resources\BookResource\RelationManagers;
-use App\Models\Book;
-use App\Models\PgList;
-use App\Models\StatusBook;
+use App\Models\Entity\Book\Book;
+use App\Models\Entity\Book\Pg;
+use App\Models\Entity\Book\Status;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -113,18 +112,11 @@ class BookResource extends Resource
 
     public static function getPgList()
     {
-        return PgList::pluck('pg', 'id');
+        return Pg::pluck('pg', 'id');
     }
 
     public static function getStatusBook()
     {
-        return StatusBook::pluck('name', 'id');
+        return Status::pluck('name', 'id');
     }
-
-    /*
-    public static function getStatusBook()
-    {
-        return
-    }
-     */
 }
