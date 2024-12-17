@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+
 class Book extends Model
 {
     use HasFactory;
@@ -20,14 +21,14 @@ class Book extends Model
         'pg',
     ];
 
-    public function pgList(): HasOne
+    public function pg(): HasOne
     {
-        return $this->hasOne(Pg::class, 'id', 'pg');
+        return $this->hasOne(Pg::class);
     }
 
-    public function statusBook(): HasOne
+    public function status(): HasOne
     {
-        return $this->hasOne(Status::class, 'id', 'status');
+        return $this->hasOne(Status::class);
     }
 
     public function tags(): BelongsToMany
