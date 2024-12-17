@@ -4,25 +4,23 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\StatusBookResource\Pages;
 use App\Filament\Resources\StatusBookResource\RelationManagers;
-use App\Models\StatusBook;
+use App\Models\Entity\Book\Status;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class StatusBookResource extends Resource
+class StatusResource extends Resource
 {
-    protected static ?string $model = StatusBook::class;
+    protected static ?string $model = Status::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Статус книги';
 
     protected static ?string $navigationGroup = 'Контент';
-    
+
     public static function form(Form $form): Form
     {
         return $form
@@ -71,9 +69,9 @@ class StatusBookResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStatusBooks::route('/'),
-            'create' => Pages\CreateStatusBook::route('/create'),
-            'edit' => Pages\EditStatusBook::route('/{record}/edit'),
+            'index' => Pages\ListStatus::route('/'),
+            'create' => Pages\CreateStatus::route('/create'),
+            'edit' => Pages\EditStatus::route('/{record}/edit'),
         ];
     }
 }

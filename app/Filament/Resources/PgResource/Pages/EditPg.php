@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\PgListResource\Pages;
 
-use App\Filament\Resources\PgListResource;
+use App\Filament\Resources\PgResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditPgList extends EditRecord
+class EditPg extends EditRecord
 {
-    protected static string $resource = PgListResource::class;
+    protected static string $resource = PgResource::class;
 
     protected function getHeaderActions(): array
     {

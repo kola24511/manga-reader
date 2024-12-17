@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Entity\Book;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class StatusBook extends Model
+class Pg extends Model
 {
     use HasFactory;
 
-    protected $table = 'status_books';
+    protected $table = 'books_pgs';
 
     protected $fillable = [
-        'name',
+        'pg',
     ];
 
     public function book(): HasOne

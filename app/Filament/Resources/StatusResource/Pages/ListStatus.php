@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\StatusBookResource\Pages;
 
-use App\Filament\Resources\StatusBookResource;
+use App\Filament\Resources\StatusResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListStatusBooks extends ListRecords
+class ListStatus extends ListRecords
 {
-    protected static string $resource = StatusBookResource::class;
+    protected static string $resource = StatusResource::class;
 
     protected function getHeaderActions(): array
     {

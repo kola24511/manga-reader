@@ -14,12 +14,12 @@ return new class extends Migration
             $table->text('description')->comment('Описание');
             $table->string('cover_image_url')->nullable()->comment('Обложка');
             $table->unsignedBigInteger('status')->nullable();
-            $table->foreign('status')->references('id')->on('status_books')->onDelete('cascade');
+            $table->foreign('status')->references('id')->on('books_status')->onDelete('cascade');
             $table->integer('likes')->default(0);
             $table->integer('views')->default(0);
             $table->integer('year_pub')->comment('Год публикации');
             $table->unsignedBigInteger('pg')->nullable();
-            $table->foreign('pg')->references('id')->on('pg_lists')->onDelete('cascade');
+            $table->foreign('pg')->references('id')->on('books_pgs')->onDelete('cascade');
             $table->timestamps();
         });
     }
