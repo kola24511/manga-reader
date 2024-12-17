@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pg_lists', function (Blueprint $table) {
+        Schema::create('books_pgs', function (Blueprint $table) {
             $table->id();
             $table->string('pg');
             $table->timestamps();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pg_lists');
+        Schema::dropIfExists('books_pgs');
     }
 };
