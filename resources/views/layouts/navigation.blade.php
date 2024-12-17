@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                    <x-nav-link :href="route('book.catalog')" :active="request()->routeIs('book.catalog')">
                         {{ __('Каталог') }}
                     </x-nav-link>
                 </div>
@@ -25,7 +25,7 @@
 
             @if (Route::has('login'))
             <!-- Settings Dropdown -->
-            
+
             <div class="hidden sm:flex sm:items-center sm:ms-6">
             @auth
                 <x-dropdown align="right" width="48">

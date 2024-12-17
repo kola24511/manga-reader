@@ -1,11 +1,16 @@
 <?php
 
+use App\Http\Controllers\Book\BookController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
+
+Route::controller(BookController::class)->group(function () {
+    Route::get('/catalog', 'catalog')->name('book.catalog');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
