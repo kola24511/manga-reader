@@ -10,6 +10,7 @@ Route::get('/', function () {
 
 Route::controller(BookController::class)->group(function () {
     Route::get('/catalog', 'catalog')->name('book.catalog');
+    Route::get('/books/{id}', 'index')->name('book.index');
 });
 
 Route::get('/dashboard', function () {
