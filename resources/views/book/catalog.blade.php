@@ -12,7 +12,7 @@
                                         <div class="mr-2">{{ $book->status }}</div>
                                         <div>{{ $book->pg }}</div>
                                     </div>
-                                    <div class="font-bold text-md truncate mb-2">{{ $book->title }}</div>
+                                    <a class="font-bold text-md truncate mb-2" href="{{ route('book.index', ['id' => $book->id]) }}">{{ $book->title }}</a>
                                 </div>
                             </div>
                         @endforeach
