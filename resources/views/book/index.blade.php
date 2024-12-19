@@ -20,7 +20,11 @@
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="flex flex-col">
                             <div class="text-xs">
-                                Тип книги
+                                @if($book->type != null)
+                                    {{ $book->type }}
+                                @else
+                                    Неизвестно
+                                @endif
                             </div>
                             <div class="text-2xl py-3">
                                 {{ $book->title }}
@@ -55,7 +59,11 @@
                                         Статус
                                     </span>
                                     <div>
-                                        {{ $book->status }}
+                                        @if($book->status != null)
+                                            {{ $book->status }}
+                                        @else
+                                            Неизвестно
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="flex flex-col">
@@ -63,7 +71,11 @@
                                         Год публикации
                                     </span>
                                     <div>
-                                        {{ $book->year_pub }}
+                                        @if($book->year_pub != null)
+                                            {{ $book->year_pub }}
+                                        @else
+                                            Неизвестно
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="flex flex-col">
@@ -71,12 +83,20 @@
                                         PG
                                     </span>
                                     <div>
-                                        {{ $book->pg }}
+                                        @if($book->pg != null)
+                                            {{ $book->pg }}
+                                        @else
+                                            Неизвестно
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="text-md pt-6">
-                                {{ $book->description }}
+                                @if($book->description != null)
+                                    {{ $book->description }}
+                                @else
+                                    Описание отсутствует
+                                @endif
                             </div>
                             <div class="text-md pt-6">
                                 Теги
