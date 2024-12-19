@@ -8,7 +8,16 @@ CONSOLE=${PHP} artisan
 .DEFAULT_GOAL := up
 
 in:
-	${DC} exec app sh
+	${DC} exec ${SERVICE_NAME} sh
+
+###> DB
+db:
+	${DC} exec pgsql psql -U postgres -d manga-reader
+fresh:
+	${CONSOLE} migrate:fresh
+refresh:
+	${CONSOLE} migrate:refresh
+###< DB
 
 ###> DOCKER COMPOSE
 start:
