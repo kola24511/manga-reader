@@ -6,6 +6,7 @@ use App\Filament\Resources\BookResource\Pages;
 use App\Models\Entity\Book\Book;
 use App\Models\Entity\Book\Pg;
 use App\Models\Entity\Book\Status;
+use App\Models\Entity\Book\Type;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -32,9 +33,6 @@ class BookResource extends Resource
                 Forms\Components\Textarea::make('description')->label('Описание')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\FileUpload::make('cover_image_url')->label('Ссылка на обложку')
-                    ->image()
-                    ->directory('books'),
                 Forms\Components\Select::make('status')->label('Статус перевода')
                     ->options(static::getStatusBook())
                     ->required(),
@@ -46,9 +44,15 @@ class BookResource extends Resource
                 Forms\Components\TextInput::make('year_pub')->label('Год публикации')
                     ->required()
                     ->numeric(),
+                Forms\Components\Select::make('type')->label('Тип книги')
+                    ->options(static::getTypeList())
+                    ->required(),
                 Forms\Components\Select::make('pg')->label('Возрастное ограничение')
                     ->options(static::getPgList())
-                    ->required()
+                    ->required(),
+                Forms\Components\FileUpload::make('cover_image_url')->label('Ссылка на обложку')
+                    ->image()
+                    ->directory('books')
             ]);
     }
 
@@ -59,7 +63,7 @@ class BookResource extends Resource
                 Tables\Columns\TextColumn::make('title')->label('Название')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('cover_image_url')->label('Обложка'),
-                Tables\Columns\TextColumn::make('statusBook.name')->label('Статус')
+                Tables\Columns\TextColumn::make('status')->label('Статус')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('likes')->label('Лайки')
                     ->numeric()
@@ -70,7 +74,7 @@ class BookResource extends Resource
                 Tables\Columns\TextColumn::make('year_pub')->label('Год публикации')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pgList.pg')->label('Возрастное ограничение')
+                Tables\Columns\TextColumn::make('pg')->label('Возрастное ограничение')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label('Дата создания')
                     ->dateTime()
@@ -118,5 +122,10 @@ class BookResource extends Resource
     public static function getStatusBook()
     {
         return Status::pluck('name', 'id');
+    }
+
+    public static function getTypeList()
+    {
+        return Type::pluck('name', 'id');
     }
 }
