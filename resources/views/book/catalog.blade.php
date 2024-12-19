@@ -9,8 +9,20 @@
                                 <img class="w-full h-72 object-fill" src="{{ asset('storage/' . $book->cover_image_url) }}" alt="Обложка книги">
                                 <div class="px-3 py-1.5">
                                     <div class="flex">
-                                        <div class="mr-2">{{ $book->status }}</div>
-                                        <div>{{ $book->pg }}</div>
+                                        <div class="mr-2">
+                                            @if($book->status != null)
+                                                {{ $book->status }}
+                                            @else
+                                                Неизвестно
+                                            @endif
+                                        </div>
+                                        <div>
+                                            @if($book->pg != null)
+                                                {{ $book->pg }}
+                                            @else
+                                                Неизвестно
+                                            @endif
+                                        </div>
                                     </div>
                                     <a class="font-bold text-md truncate mb-2" href="{{ route('book.index', ['id' => $book->id]) }}">{{ $book->title }}</a>
                                 </div>
