@@ -18,17 +18,23 @@ class Book extends Model
         'cover_image_url',
         'status',
         'year_pub',
+        'type',
         'pg',
     ];
 
     public function pg(): HasOne
     {
-        return $this->hasOne(Pg::class);
+        return $this->hasOne(Pg::class, 'id', 'pg');
     }
 
     public function status(): HasOne
     {
-        return $this->hasOne(Status::class);
+        return $this->hasOne(Status::class, 'id', 'status');
+    }
+
+    public function type(): HasOne
+    {
+        return $this->hasOne(Type::class);
     }
 
     public function tags(): BelongsToMany

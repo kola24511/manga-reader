@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('likes')->default(0);
             $table->integer('views')->default(0);
             $table->integer('year_pub')->comment('Год публикации');
+            $table->unsignedBigInteger('type')->nullable()->comment('Манга, Манхва');
+            $table->foreign('type')->references('id')->on('books_types')->onDelete('cascade');
             $table->unsignedBigInteger('pg')->nullable();
             $table->foreign('pg')->references('id')->on('books_pgs')->onDelete('cascade');
             $table->timestamps();
