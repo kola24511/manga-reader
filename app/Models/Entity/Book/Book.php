@@ -2,6 +2,7 @@
 
 namespace App\Models\Entity\Book;
 
+use App\Models\Entity\Author;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -40,5 +41,10 @@ class Book extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'books_tags');
+    }
+
+    public function authors(): BelongsToMany
+    {
+        return $this->belongsToMany(Author::class, 'authors_books');
     }
 }

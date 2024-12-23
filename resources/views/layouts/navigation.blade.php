@@ -21,6 +21,11 @@
                         {{ __('Каталог') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('author.list')" :active="request()->routeIs('author.list')">
+                        {{ __('Авторы') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             @if (Route::has('login'))
