@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Book\BookController;
+use App\Http\Controllers\Author\AuthorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,11 @@ Route::get('/', function () {
 Route::controller(BookController::class)->group(function () {
     Route::get('/catalog', 'catalog')->name('book.catalog');
     Route::get('/books/{id}', 'index')->name('book.index');
+});
+
+Route::controller(AuthorController::class)->group(function () {
+    Route::get('/authors', 'authorsShow')->name('author.list');
+    Route::get('/authors/{id}', 'authorMain')->name('author.index');
 });
 
 Route::get('/dashboard', function () {
