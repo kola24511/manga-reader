@@ -28,7 +28,17 @@ class BookController extends Controller
             ->where('books.id', $id)
             ->first();
 
-        return view('book.index', compact('book'));
+        $authors = DB::table('authors')
+            ->join('authors_books', 'authors.id', '=', 'authors_books.author_id')
+            ->where('authors_books.book_id', $id)
+            ->select(
+                "authors.id as id",
+                "authors.name as name",
+                "authors.avatar_url as avatar_url",
+            )
+            ->get();
+
+        return view('book.index', compact('book', 'authors'));
     }
 
     public function catalog()
