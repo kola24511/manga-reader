@@ -41,6 +41,11 @@ class BookResource extends Resource
                     ->relationship('tags', 'name')
                     ->preload()
                     ->required(),
+                Forms\Components\Select::make('author_id')->label("Авторы")
+                    ->multiple()
+                    ->relationship('authors', 'name')
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('year_pub')->label('Год публикации')
                     ->required()
                     ->numeric(),
