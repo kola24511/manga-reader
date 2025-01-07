@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Book;
+namespace App\Http\Controllers\Entity\Book;
 
 use App\Http\Controllers\Controller;
-use App\Models\Entity\Book\Tag;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
