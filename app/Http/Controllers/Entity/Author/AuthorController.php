@@ -3,43 +3,27 @@
 namespace App\Http\Controllers\Entity\Author;
 
 use App\Http\Controllers\Controller;
+use App\Services\AuthorService;
 use Illuminate\Support\Facades\DB;
 
 class AuthorController extends Controller
 {
-    public function authorMain($id)
+    protected AuthorService $authorService;
+
+    public function __construct(AuthorService $authorService)
     {
-        $author = DB::table('authors')
-            ->select(
-                "authors.name",
-                "authors.avatar_url",
-            )
-            ->where('authors.id', $id)
-            ->first();
-
-        $books = DB::table('books')
-            ->join('authors_books', 'books.id', '=', 'authors_books.book_id')
-            ->where('authors_books.author_id', $id)
-            ->select(
-                "books.id as id",
-                "books.title as title",
-                "books.cover_image_url as cover_image_url",
-            )
-            ->get();
-
-        return view('author.index', compact('author', 'books'));
+        $this->authorService = $authorService;
     }
 
-    public function authorsShow()
+    public function find($id)
     {
-        $authors = DB::table("authors")
-            ->select(
-                "authors.id",
-                "authors.name",
-                "authors.avatar_url",
-            )
-            ->get();
+        $authorData = $this->authorService->find($id);
+        return view('author.index', $authorData);
+    }
 
+    public function show()
+    {
+        $authors = $this->authorService->show();
         return view('author.list', ['authors' => $authors]);
     }
 }
