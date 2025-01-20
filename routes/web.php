@@ -11,13 +11,13 @@ Route::get('/', function () {
 })->name('index');
 
 Route::controller(BookController::class)->group(function () {
-    Route::get('/catalog', 'catalog')->name('book.catalog');
-    Route::get('/books/{id}', 'index')->name('book.index');
+    Route::get('/catalog', 'show')->name('book.catalog');
+    Route::get('/books/{id}', 'find')->name('book.index');
 });
 
 Route::controller(AuthorController::class)->group(function () {
-    Route::get('/authors', 'authorsShow')->name('author.list');
-    Route::get('/authors/{id}', 'authorMain')->name('author.index');
+    Route::get('/authors', 'show')->name('author.list');
+    Route::get('/authors/{id}', 'find')->name('author.index');
 });
 
 Route::get('/dashboard', function () {
