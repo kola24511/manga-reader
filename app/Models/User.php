@@ -53,12 +53,12 @@ class User extends Authenticatable implements FilamentUser
     //Функция для доступа с определенного почтового домена
     public function canAccessPanel(Panel $panel): bool
     {
-    if (app()->environment('local')) {
-        //не требует верификации почты
-        return str_ends_with($this->email, '@gmail.com');
-    } else {
-        // Продакшен или другое окружение
-        return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail(); 
+        if (app()->environment('local')) {
+            //не требует верификации почты
+            return str_ends_with($this->email, '@gmail.com');
+        } else {
+            // Продакшен или другое окружение
+            return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
+        }
     }
-}
 }
