@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Database\Factories\Administration\FlightFactory;
 use App\Models\Entity\Author;
 
 class AuthorFactory extends Factory
