@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             PgSeeder::class,
             TagSeeder::class,
             StatusSeeder::class,
+            GenresSeeder::class,
         ]);
     }
 }

@@ -42,6 +42,10 @@ class Book extends Model
     {
         return $this->belongsToMany(Tag::class, 'books_tags');
     }
+    public function genres(): BelongsToMany
+    {
+        return $this->belongsToMany(Genre::class, 'books_genres');
+    }
 
     public function authors(): BelongsToMany
     {

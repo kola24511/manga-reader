@@ -36,6 +36,11 @@ class BookResource extends Resource
                 Forms\Components\Select::make('status')->label('Статус перевода')
                     ->options(static::getStatusBook())
                     ->required(),
+                Forms\Components\Select::make('genre_id')->label("Жанры")
+                    ->multiple()
+                    ->relationship('genres', 'name')
+                    ->preload()
+                    ->required(),
                 Forms\Components\Select::make('tag_id')->label("Тэги")
                     ->multiple()
                     ->relationship('tags', 'name')
