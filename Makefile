@@ -17,6 +17,8 @@ fresh:
 	${CONSOLE} migrate:fresh
 refresh:
 	${CONSOLE} migrate:refresh
+seed:
+	${CONSOLE} db:seed
 ###< DB
 
 ###> DOCKER COMPOSE
