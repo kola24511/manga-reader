@@ -36,9 +36,29 @@ class BookService
             )
             ->get();
 
+        $genres = DB::table('genres')
+            ->join('books_genres', 'genres.id', '=', 'books_genres.genre_id')
+            ->where('books_genres.book_id', $id)
+            ->select(
+                "genres.id as id",
+                "genres.name as name",
+            )
+            ->get();
+
+        $tags = DB::table('tags')
+            ->join('books_tags', 'tags.id', '=', 'books_tags.tag_id')
+            ->where('books_tags.book_id', $id)
+            ->select(
+                "tags.id as id",
+                "tags.name as name",
+            )
+            ->get();
+
         return [
             "book" => $book,
             "authors" => $authors,
+            "genres" => $genres,
+            "tags" => $tags
         ];
     }
 
