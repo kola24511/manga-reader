@@ -2,7 +2,7 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Entity\Author;
+use App\Models\Entity\Author\Author;
 use App\Models\Entity\Book\Book;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;

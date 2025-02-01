@@ -2,7 +2,7 @@
 
 namespace App\Models\Entity\Book;
 
-use App\Models\Entity\Author;
+use App\Models\Entity\Author\Author;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

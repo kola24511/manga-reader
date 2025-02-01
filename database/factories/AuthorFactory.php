@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Entity\Author\Author;
+use App\Models\Entity\Author\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Entity\Author;
 
 class AuthorFactory extends Factory
 {
@@ -12,7 +13,7 @@ class AuthorFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name()
+            'name' => fake()->name(),
         ];
     }
 }
