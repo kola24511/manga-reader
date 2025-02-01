@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Entity\Author;
+use App\Models\Entity\Author\Author;
+use App\Models\Entity\Author\Role;
 use Illuminate\Database\Seeder;
 
 
@@ -10,6 +11,14 @@ class AuthorSeeder extends Seeder
 {
     public function run(): void
     {
-        Author::factory()->count(10)->create();
+        $roles = Role::all();
+
+        Author::factory()
+            ->count(5)
+            ->create()
+            ->each(function (Author $author) use ($roles) {
+                $author->role_id = $roles->random()->id;
+                $author->save();
+            });
     }
 }

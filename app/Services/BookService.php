@@ -28,10 +28,12 @@ class BookService
 
         $authors = DB::table('authors')
             ->join('authors_books', 'authors.id', '=', 'authors_books.author_id')
+            ->leftJoin("authors_roles", "authors.role_id", "=", "authors_roles.id")
             ->where('authors_books.book_id', $id)
             ->select(
                 "authors.id as id",
                 "authors.name as name",
+                "authors_roles.name as role",
                 "authors.avatar_url as avatar_url",
             )
             ->get();

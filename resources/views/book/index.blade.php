@@ -134,6 +134,9 @@
                                                             {{ $author->name }}
                                                         </span>
                                                     </a>
+                                                    <div class="text-center">
+                                                        {{ $author->role }}
+                                                    </div>
                                                 </div>
                                             </div>
                                         @endforeach

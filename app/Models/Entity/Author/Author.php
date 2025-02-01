@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Models\Entity;
+namespace App\Models\Entity\Author;
 
 use App\Models\Entity\Book\Book;
 use Database\Factories\AuthorFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Author extends Model
 {
@@ -14,6 +15,7 @@ class Author extends Model
 
     protected $fillable = [
         'name',
+        'role_id',
         'avatar_url',
     ];
 
@@ -22,6 +24,11 @@ class Author extends Model
     public function books(): BelongsToMany
     {
         return $this->belongsToMany(Book::class);
+    }
+
+    public function role(): HasOne
+    {
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
 
     protected static function newFactory()
