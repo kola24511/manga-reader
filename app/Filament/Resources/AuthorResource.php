@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\Entity\AuthorResource\Pages;
-use App\Filament\Resources\Entity\AuthorResource\RelationManagers;
-use App\Models\Entity\Author;
+use App\Models\Entity\Author\Author;
+use App\Models\Entity\Author\Role;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -28,6 +27,9 @@ class AuthorResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('role_id')->label('Роль автора')
+                    ->options(static::getAuthorRole())
+                    ->required(),
                 Forms\Components\FileUpload::make('avatar_url')->label('Ссылка на аватар')
                     ->image()
                     ->directory('authors')
@@ -40,9 +42,14 @@ class AuthorResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Имя автора')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('role.name')
+                    ->label('Роль')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('avatar_url')
-                    ->label('Аватар'),
+                    ->label('Аватар')
+                    ->default('authors/default.png'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -79,5 +86,10 @@ class AuthorResource extends Resource
             'create' => AuthorResource\Pages\CreateAuthor::route('/create'),
             'edit' => AuthorResource\Pages\EditAuthor::route('/{record}/edit'),
         ];
+    }
+
+    public static function getAuthorRole()
+    {
+        return Role::pluck('name', 'id');
     }
 }
