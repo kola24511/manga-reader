@@ -1,4 +1,5 @@
 import './bootstrap';
+import './theme-switcher.js';
 
 import Alpine from 'alpinejs';
 

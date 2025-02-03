@@ -32,6 +32,10 @@
             <!-- Settings Dropdown -->
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <div class="mx-2">
+                    <img src="{{ asset('icons/sun.svg') }}" class="sun cursor-pointer h-8 w-8" alt="">
+                    <img src="{{ asset('icons/moon.svg') }}" class="moon cursor-pointer h-8 w-8" alt="">
+                </div>
             @auth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
