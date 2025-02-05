@@ -31,6 +31,7 @@
 	npm install
 	php artisan key:generate
     php artisan storage:link
+    make certs
 
 Для запуска проекта в docker можно использовать сокращения комманд с помощью Make:
 
