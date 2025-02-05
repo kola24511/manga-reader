@@ -1,53 +1,83 @@
+version: "3.8"
+
 services:
-  app:
-    container_name: app
-    build:
-      context: .
-      dockerfile: .docker/app/Dockerfile
-    entrypoint: php artisan octane:frankenphp --max-requests=1
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-    depends_on:
-      pgsql:
-        condition: service_healthy
-    networks:
-      - readmanga
-  queue-runner:
-    container_name: queue-runner
-    build:
-      context: .
-      dockerfile: .docker/app/Dockerfile
-    entrypoint: php artisan queue:work --tries=3 --timeout=90 --sleep=3 --daemon
-    volumes:
-      - .:/app
-    depends_on:
-      pgsql:
-        condition: service_healthy
-    networks:
-      - readmanga
-  pgsql:
-    container_name: pgsql
-    image: postgres:17-alpine
-    restart: always
-    ports:
-      - 5432:5432
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USERNAME}
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
-      interval: 1s
-      timeout: 5s
-      retries: 10
-    networks:
-      - readmanga
+    traefik:
+        container_name: traefik
+        image: traefik:v3.3
+        command:
+            - "--api.insecure=true"
+            - "--providers.docker=true"
+            - "--entrypoints.web.address=:80"
+            - "--entrypoints.websecure.address=:443"
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - .config/traefik.yaml:/etc/traefik/traefik.yaml
+            - ./certs:/etc/ssl
+        restart: unless-stopped
+        networks:
+            - readmanga
+
+    app:
+        container_name: app
+        build:
+            context: .
+            dockerfile: .docker/app/Dockerfile
+        volumes:
+            - .:/app
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.app.rule=Host(`localhost`)"
+            - "traefik.http.routers.app.entrypoints=websecure"
+            - "traefik.http.routers.app.tls.certResolver=selfsigned"
+            - "traefik.http.services.app.loadbalancer.server.port=8000"
+            - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+        depends_on:
+            pgsql:
+                condition: service_healthy
+        networks:
+            - readmanga
+
+    queue-runner:
+        container_name: queue-runner
+        build:
+            context: .
+            dockerfile: .docker/app/Dockerfile
+        entrypoint: php artisan queue:work --tries=3 --timeout=90 --sleep=3 --daemon
+        volumes:
+            - .:/app
+        depends_on:
+            pgsql:
+                condition: service_healthy
+        networks:
+            - readmanga
+
+    pgsql:
+        container_name: pgsql
+        image: postgres:17-alpine
+        restart: always
+        ports:
+            - 5432:5432
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        environment:
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+            interval: 1s
+            timeout: 5s
+            retries: 10
+        networks:
+            - readmanga
+
 volumes:
-  pgdata:
+    pgdata:
+
 networks:
     readmanga:
         driver: bridge
