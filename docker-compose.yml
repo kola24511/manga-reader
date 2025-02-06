@@ -1,4 +1,3 @@
-version: "3.8"
 
 services:
     traefik:
@@ -12,6 +11,7 @@ services:
         ports:
             - "80:80"
             - "443:443"
+            - "443:443/udp"
             - "8080:8080"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
