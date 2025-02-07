@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('avatar_url')->default("default.png");
+            $table->string('avatar_url')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->foreign('role_id')->references('id')->on('authors_roles')->onDelete('cascade');
             $table->timestamps();
