@@ -24,7 +24,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <a class="font-bold text-md truncate mb-2" href="{{ route('book.index', ['id' => $book->id]) }}">{{ $book->title }}</a>
+                                    <a class="font-bold text-md truncate mb-2" href="{{ route('book.index', ['slug' => $book->slug]) }}">{{ $book->title }}</a>
                                 </div>
                             </div>
                         @endforeach
