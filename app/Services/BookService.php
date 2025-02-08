@@ -6,14 +6,32 @@ use Illuminate\Support\Facades\DB;
 
 class BookService
 {
-    public function find($id)
+    public function find($slug)
     {
-        $book = DB::table('books')
+        $book = $this->getBookBySlug($slug);
+
+        if (!$book) {
+            abort(404);
+        }
+
+        return [
+            "book" => $book,
+            "authors" => $this->getAuthors($book->id),
+            "genres" => $this->getGenres($book->id),
+            "tags" => $this->getTags($book->id)
+        ];
+    }
+
+    private function getBookBySlug($slug)
+    {
+        return DB::table('books')
             ->leftJoin("books_status", "books.status", "=", "books_status.id")
             ->leftJoin("books_pgs", "books.pg", "=", "books_pgs.id")
             ->leftJoin("books_types", "books.type", "=", "books_types.id")
             ->select(
+                "books.id",
                 "books.title",
+                "books.slug",
                 "books.cover_image_url",
                 "books_status.name as status",
                 "books_pgs.pg as pg",
@@ -23,45 +41,41 @@ class BookService
                 "books.likes",
                 "books.views"
             )
-            ->where('books.id', $id)
+            ->where('books.slug', $slug)
             ->first();
+    }
 
-        $authors = DB::table('authors')
+    private function getAuthors($bookId)
+    {
+        return DB::table('authors')
             ->join('authors_books', 'authors.id', '=', 'authors_books.author_id')
             ->leftJoin("authors_roles", "authors.role_id", "=", "authors_roles.id")
-            ->where('authors_books.book_id', $id)
+            ->where('authors_books.book_id', $bookId)
             ->select(
                 "authors.id as id",
                 "authors.name as name",
                 "authors_roles.name as role",
-                "authors.avatar_url as avatar_url",
+                "authors.avatar_url as avatar_url"
             )
             ->get();
+    }
 
-        $genres = DB::table('genres')
+    private function getGenres($bookId)
+    {
+        return DB::table('genres')
             ->join('books_genres', 'genres.id', '=', 'books_genres.genre_id')
-            ->where('books_genres.book_id', $id)
-            ->select(
-                "genres.id as id",
-                "genres.name as name",
-            )
+            ->where('books_genres.book_id', $bookId)
+            ->select("genres.id as id", "genres.name as name")
             ->get();
+    }
 
-        $tags = DB::table('tags')
+    private function getTags($bookId)
+    {
+        return DB::table('tags')
             ->join('books_tags', 'tags.id', '=', 'books_tags.tag_id')
-            ->where('books_tags.book_id', $id)
-            ->select(
-                "tags.id as id",
-                "tags.name as name",
-            )
+            ->where('books_tags.book_id', $bookId)
+            ->select("tags.id as id", "tags.name as name")
             ->get();
-
-        return [
-            "book" => $book,
-            "authors" => $authors,
-            "genres" => $genres,
-            "tags" => $tags
-        ];
     }
 
     public function show()
@@ -72,6 +86,7 @@ class BookService
             ->select(
                 "books.id",
                 "books.title",
+                "books.slug",
                 "books.cover_image_url",
                 "books_status.name as status",
                 "books_pgs.pg as pg"

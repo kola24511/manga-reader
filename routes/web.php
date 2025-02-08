@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::controller(BookController::class)->group(function () {
     Route::get('/catalog', 'show')->name('book.catalog');
-    Route::get('/books/{id}', 'find')->name('book.index');
+    Route::get('/books/{slug}', 'find')->name('book.index');
 });
 
 Route::controller(AuthorController::class)->group(function () {
