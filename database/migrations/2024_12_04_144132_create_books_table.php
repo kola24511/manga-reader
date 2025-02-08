@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title')->comment("Название");
+            $table->string('slug')->unique();
             $table->text('description')->comment('Описание');
             $table->string('cover_image_url')->nullable()->comment('Обложка');
             $table->unsignedBigInteger('status')->nullable();

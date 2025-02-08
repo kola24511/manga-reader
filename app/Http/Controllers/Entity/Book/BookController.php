@@ -14,9 +14,9 @@ class BookController extends Controller
         $this->bookService = $bookService;
     }
 
-    public function find($id)
+    public function find($slug)
     {
-        $bookData = $this->bookService->find($id);
+        $bookData = $this->bookService->find($slug);
         return view('book.index', $bookData);
     }
 
