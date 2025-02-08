@@ -3,6 +3,7 @@
 namespace App\Models\Entity\Book;
 
 use App\Models\Entity\Author\Author;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,10 +12,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Book extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $fillable = [
         'title',
+        'slug',
         'description',
         'cover_image_url',
         'status',
@@ -22,6 +24,16 @@ class Book extends Model
         'type',
         'pg',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'onUpdate' => true
+            ]
+        ];
+    }
 
     public function pg(): HasOne
     {
