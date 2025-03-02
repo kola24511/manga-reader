@@ -34,7 +34,7 @@
                                             <img class="w-full h-72 object-fill"
                                                  src="{{ $book->cover_image_url ? asset('storage/' . $book->cover_image_url) : asset('images/default-avatar.png') }}" alt="Обложка книги">
                                             <div class="px-3 py-1.5">
-                                                <a class="font-bold text-md truncate" href="{{ route('book.index', ['id' => $book->id]) }}">
+                                                <a class="font-bold text-md truncate" href="{{ route('book.index', ['slug' => $book->slug]) }}">
                                                     <span class="inline-block align-middle">
                                                         {{ $book->title }}
                                                     </span>

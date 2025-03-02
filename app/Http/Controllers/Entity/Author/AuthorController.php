@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Entity\Author;
 
 use App\Http\Controllers\Controller;
 use App\Services\AuthorService;
-use Illuminate\Support\Facades\DB;
 
 class AuthorController extends Controller
 {
