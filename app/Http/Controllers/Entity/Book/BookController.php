@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Entity\Book;
 
 use App\Http\Controllers\Controller;
 use App\Services\BookService;
-use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
