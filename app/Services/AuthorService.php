@@ -23,6 +23,7 @@ class AuthorService extends Service
             ->select(
                 "books.id as id",
                 "books.title as title",
+                "books.slug as slug",
                 "books.cover_image_url as cover_image_url",
             )
             ->get();
