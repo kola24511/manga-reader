@@ -3,6 +3,7 @@
 namespace App\Models\Entity\Book;
 
 use App\Models\Entity\Author\Author;
+use App\Models\Entity\Bookmark;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -62,5 +63,10 @@ class Book extends Model
     public function authors(): BelongsToMany
     {
         return $this->belongsToMany(Author::class, 'authors_books');
+    }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
     }
 }

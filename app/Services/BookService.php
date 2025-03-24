@@ -14,11 +14,15 @@ class BookService
             abort(404);
         }
 
+        $bookmarkData = $this->getBookmarkData($book->id);
+
         return [
             "book" => $book,
             "authors" => $this->getAuthors($book->id),
             "genres" => $this->getGenres($book->id),
-            "tags" => $this->getTags($book->id)
+            "tags" => $this->getTags($book->id),
+            "bookmarkStatuses" => $bookmarkData["bookmarkStatuses"],
+            "currentBookmarkStatus" => $bookmarkData["currentBookmarkStatus"],
         ];
     }
 
@@ -92,5 +96,16 @@ class BookService
                 "books_pgs.pg as pg"
             )
             ->get();
+    }
+
+    private function getBookmarkData($bookId)
+    {
+        return [
+            "bookmarkStatuses" => DB::table('bookmark_statuses')->get(),
+            "currentBookmarkStatus" => DB::table('bookmarks')
+                ->where('user_id', auth()->id())
+                ->where('book_id', $bookId)
+                ->value('status_id')
+        ];
     }
 }
