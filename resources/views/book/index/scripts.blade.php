@@ -13,7 +13,7 @@
                             return;
                         }
 
-                        fetch('/bookmarks', {
+                        fetch(`/books/${this.bookId}/bookmark`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -24,17 +24,16 @@
                                 status_id: this.selectedStatus
                             })
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.bookmark && data.bookmark.status_id) {
-                                    this.selectedStatus = data.bookmark.status_id;
-                                } else {
-                                    console.error('Ошибка: сервер не вернул корректные данные');
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Ошибка при обновлении закладки');
                                 }
+                                console.log('Закладка успешно обновлена');
                             })
                             .catch(error => {
                                 console.error('Ошибка запроса:', error);
                             });
+
                     }
                 }));
             });

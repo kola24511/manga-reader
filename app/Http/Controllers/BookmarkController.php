@@ -22,8 +22,12 @@ class BookmarkController extends Controller
             'status_id' => 'nullable|exists:bookmark_statuses,id',
         ]);
 
-        $bookmark = app(BookmarkService::class)->update($request->book_id, $request->status_id);
+        $bookmark = $this->bookmarkService->update($request->book_id, $request->status_id);
 
+        return response()->json(['message' => 'Закладка обновлена'], 200);
+
+
+        /*
         return response()->json([
             'message' => 'Закладка обновлена',
             'bookmark' => [
@@ -32,5 +36,6 @@ class BookmarkController extends Controller
                 'updated_at' => $bookmark->updated_at,
             ]
         ]);
+        */
     }
 }

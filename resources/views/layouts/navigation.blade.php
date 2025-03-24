@@ -51,7 +51,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                    <x-dropdown-link :href="route('dashboard')">
+                    <x-dropdown-link :href="route('dashboard.index')">
                             {{ __('Профиль') }}
                         </x-dropdown-link>
                         <x-dropdown-link :href="route('profile.edit')">
@@ -118,7 +118,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')">
+            <x-responsive-nav-link :href="route('dashboard.index')">
                     {{ __('Профиль') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('profile.edit')">
