@@ -1,3 +1,5 @@
-<div>
-    Достижения
+<div class="p-4">
+    <span class="text-black dark:text-gray-200">
+        Достижения
+    </span>
 </div>
