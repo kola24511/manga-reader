@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-gray-800">
+<div class="bg-white dark:bg-gray-960">
     <div class="max-w-screen-lg px-4 sm:px-6 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto">
         <div class="p-5">
             <h3 class="font-bold text-xl dark:text-gray-200">
@@ -52,7 +52,7 @@
     </div>
 </div>
 
-<div class="bg-white dark:bg-gray-800 border-t pt-2">
+<div class="bg-white dark:bg-gray-960 border-t dark:border-gray-930 pt-2">
     <div class="flex m-auto text-gray-300 text-sm flex-col
       max-w-screen-lg items-center py-1">
         <div class="my-5 text-gray-800 dark:text-gray-200">© Copyright 2025. Все права защищены.</div>
