@@ -1,3 +1,5 @@
-<div>
-    Закладки
+<div class="p-4">
+    <span class="text-black dark:text-gray-200">
+        Закладки
+    </span>
 </div>

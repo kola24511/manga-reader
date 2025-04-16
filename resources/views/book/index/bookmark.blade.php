@@ -2,7 +2,7 @@
     <select x-model="selectedStatus"
             @change="saveBookmark"
             x-effect="console.log('selectedStatus изменился:', selectedStatus)"
-            class="border rounded p-2">
+            class="w-full rounded text-gray-800 dark:text-white bg-white dark:bg-gray-960">
         <option value="">Выбрать статус</option>
         @foreach($bookmarkStatuses as $status)
             <option value="{{ $status->id }}">
