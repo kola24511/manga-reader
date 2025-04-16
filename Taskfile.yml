@@ -1,0 +1,104 @@
+version: '3'
+
+dotenv: ['.env.task']
+
+vars:
+  SERVICE_NAME: app
+  DOMAIN: localhost
+  CERT_DIR: .certs
+  CERT_FILE: "{{.CERT_DIR}}/traefik-selfsigned.crt"
+  KEY_FILE: "{{.CERT_DIR}}/traefik-selfsigned.key"
+  DC: '{{.DOCKER_COMPOSE}} -f docker-compose.yml'
+  DCE: '{{.DC}} exec {{.SERVICE_NAME}}'
+
+env:
+  COMPOSER_MEMORY_LIMIT: -1
+
+tasks:
+  default:
+    desc: Запуск генерации сертификатов и поднятие контейнеров
+    deps: [init]
+    cmds:
+      - task: certs
+      - task: up
+
+  in:
+    desc: Открыть shell внутри контейнера
+    deps: [init]
+    cmds:
+      - '{{.DCE}} sh'
+
+  db:
+    desc: Открыть psql для PostgreSQL
+    deps: [init]
+    cmds:
+      - '{{.DC}} exec pgsql psql -U postgres -d manga-reader'
+
+  fresh:
+    desc: Выполнить команду artisan migrate:fresh (очистка и повторная миграция БД)
+    deps: [init]
+    cmds:
+      - '{{.DCE}} php artisan migrate:fresh'
+
+  refresh:
+    desc: Выполнить команду artisan migrate:refresh (откат и повторная миграция БД)
+    deps: [init]
+    cmds:
+      - '{{.DCE}} php artisan migrate:refresh'
+
+  seed:
+    desc: Выполнить команду artisan db:seed (засев данных в БД)
+    deps: [init]
+    cmds:
+      - '{{.DCE}} php artisan db:seed'
+
+  start:
+    desc: Запустить контейнеры
+    deps: [init]
+    cmds:
+      - '{{.DC}} start'
+
+  up:
+    desc: Поднять контейнеры в фоновом режиме
+    deps: [init]
+    cmds:
+      - '{{.DC}} up -d'
+
+  build:
+    desc: Собрать контейнеры
+    deps: [init]
+    cmds:
+      - '{{.DC}} build'
+
+  down:
+    desc: Остановить и удалить контейнеры
+    deps: [init]
+    cmds:
+      - '{{.DC}} down'
+
+  stop:
+    desc: Остановить контейнеры
+    deps: [ init ]
+    cmds:
+      - '{{.DC}} stop'
+
+  certs:
+    desc: Сгенерировать самоподписанный сертификат
+    cmds:
+      - mkdir -p {{.CERT_DIR}}
+      - openssl req -x509 -nodes -days 365 -newkey rsa:2048
+        -keyout {{.KEY_FILE}} -out {{.CERT_FILE}}
+        -subj "/CN={{.DOMAIN}}"
+
+  init:
+    desc: Инициализация docker-compose
+    silent: true
+    cmds:
+      - |
+        if command -v docker-compose > /dev/null; then
+          echo 'DOCKER_COMPOSE=docker-compose' > .env.task
+        else
+          echo 'DOCKER_COMPOSE=docker compose' > .env.task
+        fi
+    status:
+      - test -f .env.task
