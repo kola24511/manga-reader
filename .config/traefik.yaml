@@ -16,21 +16,12 @@ entryPoints:
   websecure:
     address: ":443"
 
-certificatesResolvers:
-  selfsigned:
-    acme:
-      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
-      email: "developer@vibetoons.com"
-      storage: "/var/traefik/certs/letsencrypt/acme.json"
-      keyType: "RSA4096"
-      tlsChallenge: {}
-
 tls:
   stores:
     default:
       defaultCertificate:
-        certFile: "/etc/ssl/certs/traefik-selfsigned.crt"
-        keyFile: "/etc/ssl/private/traefik-selfsigned.key"
+        certFile: "/etc/ssl/certs/selfsigned.crt"
+        keyFile: "/etc/ssl/private/selfsigned.key"
 
 providers:
   docker:

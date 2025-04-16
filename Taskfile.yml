@@ -6,8 +6,8 @@ vars:
   SERVICE_NAME: app
   DOMAIN: localhost
   CERT_DIR: .certs
-  CERT_FILE: "{{.CERT_DIR}}/traefik-selfsigned.crt"
-  KEY_FILE: "{{.CERT_DIR}}/traefik-selfsigned.key"
+  CERT_FILE: "{{.CERT_DIR}}/selfsigned.crt"
+  KEY_FILE: "{{.CERT_DIR}}/selfsigned.key"
   DC: '{{.DOCKER_COMPOSE}} -f docker-compose.yml'
   DCE: '{{.DC}} exec {{.SERVICE_NAME}}'
 
