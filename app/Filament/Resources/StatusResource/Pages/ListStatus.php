@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\StatusBookResource\Pages;
+namespace App\Filament\Resources\StatusResource\Pages;
 
 use App\Filament\Resources\StatusResource;
 use Filament\Actions;
