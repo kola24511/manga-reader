@@ -6,6 +6,8 @@ services:
             dockerfile: .docker/app/Dockerfile
         volumes:
             - .:/app
+        ports:
+            - "8000:8000"
         depends_on:
             pgsql:
                 condition: service_healthy
