@@ -10,7 +10,7 @@
         "filament/filament": "^3.2",
         "filament/widgets": "^3.2",
         "laravel/cashier": "^15.5",
-        "laravel/framework": "^11.9",
+        "laravel/framework": "^12",
         "laravel/octane": "^2.5",
         "laravel/tinker": "^2.9"
     },
