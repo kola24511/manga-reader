@@ -78,6 +78,11 @@ tasks:
     cmds:
       - '{{.DC}} stop'
 
+  user:
+    desc: Создать юзера
+    cmds:
+      - '{{.DCE}} php artisan make:filament-user'
+
   init:
     desc: Инициализация docker-compose
     silent: true
