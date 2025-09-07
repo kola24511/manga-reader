@@ -2,8 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AuthorStatusResource\Pages;
-use App\Filament\Resources\AuthorStatusResource\RelationManagers;
+use App\Filament\Resources\AuthorRoleResource\Pages;
 use App\Models\Entity\Author\Role;
 use Filament\Forms;
 use Filament\Forms\Form;

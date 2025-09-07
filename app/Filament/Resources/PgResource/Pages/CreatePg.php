@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\PgListResource\Pages;
+namespace App\Filament\Resources\PgResource\Pages;
 
 use App\Filament\Resources\PgResource;
 use Filament\Actions;

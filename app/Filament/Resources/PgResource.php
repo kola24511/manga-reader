@@ -2,8 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PgListResource\Pages;
-use App\Filament\Resources\PgListResource\RelationManagers;
+use App\Filament\Resources\PgResource\Pages;
 use App\Models\Entity\Book\Pg;
 use Filament\Forms;
 use Filament\Forms\Form;

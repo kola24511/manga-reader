@@ -2,8 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\StatusBookResource\Pages;
-use App\Filament\Resources\StatusBookResource\RelationManagers;
+use App\Filament\Resources\StatusResource\Pages;
 use App\Models\Entity\Book\Status;
 use Filament\Forms;
 use Filament\Forms\Form;
