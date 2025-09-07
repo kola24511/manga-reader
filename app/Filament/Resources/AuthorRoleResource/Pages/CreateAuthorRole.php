@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\AuthorStatusResource\Pages;
+namespace App\Filament\Resources\AuthorRoleResource\Pages;
 
 use App\Filament\Resources\AuthorRoleResource;
 use Filament\Actions;
